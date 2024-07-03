@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pos_config_form"
+        model="ir.ui.view">
+        <field name="name">pos.config.form</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id"
+            ref="point_of_sale.pos_config_view_form" />
+        <field name="arch"
+            type="xml">
+            <xpath expr="//sheet"
+                position="inside">
+
+                <h2 name="order">Warehouse [M]</h2>
+
+                <div class="row mt16 o_settings_container">
+
+                    <setting title="Use warehouse"
+                        string="Allow use location for pos"
+                        help="Activate a location to load in POS">
+                        <field name="location"
+                            readonly="has_active_session" />
+                    </setting>
+                    <setting invisible="location == False"
+                        title="Warehouse to use"
+                        string="Select location for pos"
+                        help="The location to get existence in this POS">
+                        <field name="location_id"
+                            readonly="has_active_session" />
+                    </setting>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

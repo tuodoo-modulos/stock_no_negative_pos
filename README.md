@@ -1,5 +1,5 @@
 
-# stock_no_negative_pos [v1.0.0]
+# stock_no_negative_pos [v1.1.0]
 
 The stock_no_negative_pos module makes the following improvements. 
 

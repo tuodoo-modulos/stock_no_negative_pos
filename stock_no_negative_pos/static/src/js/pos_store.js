@@ -3,18 +3,21 @@ import { patch } from "@web/core/utils/patch";
 import { PosStore } from "@point_of_sale/app/store/pos_store";
 import { Orderline } from "@point_of_sale/app/store/models";
 
-
-let pos_notification = undefined
-function error_not_enough_stock(product)
-{
+let pos_notification = undefined;
+function error_not_enough_stock(product) {
   const msj = "No hay stock suficiente " + product.display_name;
-  pos_notification.add( msj, 4000);
+  pos_notification.add(msj, 4000);
 }
 
 function validate_stock(product, new_qty) {
   new_qty = new_qty * 1;
   const selected_id = product.id;
   const qty_real_time = product_inventory_real_time[selected_id];
+
+  if (!qty_real_time) {
+    return false;
+  }
+
   const available_quantity = qty_real_time.available_quantity;
   if (available_quantity < new_qty) {
     error_not_enough_stock(product);
@@ -26,9 +29,8 @@ function validate_stock(product, new_qty) {
 let product_inventory_real_time = {};
 
 patch(PosStore.prototype, {
-  async _processData(loadedData)
-  {
-    pos_notification = this.env.services.pos_notification
+  async _processData(loadedData) {
+    pos_notification = this.env.services.pos_notification;
     await super._processData(...arguments);
     this.stock_quant = loadedData["stock.quant"];
 
@@ -65,7 +67,6 @@ patch(PosStore.prototype, {
   },
 
   async _save_to_server(orders, options) {
-
     for (const key in this.product_inventory_real_time) {
       if (Object.hasOwnProperty.call(this.product_inventory_real_time, key)) {
         const element = this.product_inventory_real_time[key];
@@ -75,6 +76,11 @@ patch(PosStore.prototype, {
     }
     return super._save_to_server(orders, options);
   },
+
+  async addProductToCurrentOrder(product, options = {}) {
+    if (!validate_stock(product, 1)) return false;
+   super.addProductToCurrentOrder(product, options);
+}
 });
 
 patch(Orderline.prototype, {

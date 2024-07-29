@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/muninmx/premiumbikes/compare/v1.1.1...v1.1.2) (2024-07-29)
+
+
+### Bug Fixes
+
+* Kevin fix ([528c0c6](https://github.com/muninmx/premiumbikes/commit/528c0c697706e993e10bd1bf06dda74e27488b6a))
+
 ### [1.1.1](https://github.com/tuodoo-modulos/stock_no_negative_pos/compare/v1.1.0...v1.1.1) (2024-07-18)
 
 

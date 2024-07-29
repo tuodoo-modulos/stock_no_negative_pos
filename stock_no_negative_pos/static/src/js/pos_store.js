@@ -85,9 +85,8 @@ patch(PosStore.prototype, {
 
 patch(Orderline.prototype, {
   set_quantity(quantity, keep_price) {
-    if (this.sale_order_origin_id)
-      return super.set_quantity(quantity, keep_price);
+    let result =  super.set_quantity(quantity, keep_price);
     if (!validate_stock(this.product, quantity)) return false;
-    return super.set_quantity(quantity, keep_price);
+    return result
   },
 });

@@ -79,14 +79,15 @@ patch(PosStore.prototype, {
 
   async addProductToCurrentOrder(product, options = {}) {
     if (!validate_stock(product, 1)) return false;
-   super.addProductToCurrentOrder(product, options);
-}
+    super.addProductToCurrentOrder(product, options);
+  },
 });
 
 patch(Orderline.prototype, {
   set_quantity(quantity, keep_price) {
+    if (this.sale_order_origin_id)
+      return super.set_quantity(quantity, keep_price);
     if (!validate_stock(this.product, quantity)) return false;
-    const res = super.set_quantity(quantity, keep_price);
-    return res;
+    return super.set_quantity(quantity, keep_price);
   },
 });

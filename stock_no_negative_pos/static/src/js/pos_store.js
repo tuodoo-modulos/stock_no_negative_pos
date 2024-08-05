@@ -10,6 +10,9 @@ function error_not_enough_stock(product) {
 }
 
 function validate_stock(product, new_qty) {
+  //Dont count service products
+  if (product.type === "service") return true;
+
   new_qty = new_qty * 1;
   const selected_id = product.id;
   const qty_real_time = product_inventory_real_time[selected_id];
@@ -85,8 +88,8 @@ patch(PosStore.prototype, {
 
 patch(Orderline.prototype, {
   set_quantity(quantity, keep_price) {
-    let result =  super.set_quantity(quantity, keep_price);
+    let result = super.set_quantity(quantity, keep_price);
     if (!validate_stock(this.product, quantity)) return false;
-    return result
+    return result;
   },
 });

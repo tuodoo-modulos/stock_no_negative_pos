@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.4](https://github.com/muninmx/premiumbikes/compare/v1.1.3...v1.1.4) (2024-08-05)
+
+
+### Bug Fixes
+
+* Allow type service ([f681f7b](https://github.com/muninmx/premiumbikes/commit/f681f7bbffb5c8034ff9261d0ca6c477bc0e7bc8))
+
 ### [1.1.3](https://github.com/muninmx/premiumbikes/compare/v1.1.2...v1.1.3) (2024-07-29)
 
 

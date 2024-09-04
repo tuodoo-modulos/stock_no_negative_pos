@@ -1,7 +1,7 @@
 /** @odoo-module */
 import { patch } from "@web/core/utils/patch";
 import { PosStore } from "@point_of_sale/app/store/pos_store";
-import { Orderline } from "@point_of_sale/app/store/models";
+import { Orderline, Order } from "@point_of_sale/app/store/models";
 
 let pos_notification = undefined;
 function error_not_enough_stock(product) {
@@ -91,5 +91,16 @@ patch(Orderline.prototype, {
     let result = super.set_quantity(quantity, keep_price);
     if (!validate_stock(this.product, quantity)) return false;
     return result;
+  },
+});
+patch(Order.prototype, {
+  pay()
+  { 
+
+    for (const orderline of this.orderlines.models) {
+      if (!validate_stock(orderline.product, orderline.quantity)) return false;
+    }
+    
+    return super.pay();
   },
 });

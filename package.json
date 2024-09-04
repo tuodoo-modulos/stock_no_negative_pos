@@ -1,6 +1,6 @@
 {
   "name": "stock_no_negative_pos",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "The stock_no_negative_pos module makes the following improvements.",
   "main": "standard-version-updater.js",
   "scripts": {

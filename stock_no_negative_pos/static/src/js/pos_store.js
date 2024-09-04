@@ -96,8 +96,8 @@ patch(Orderline.prototype, {
 patch(Order.prototype, {
   pay()
   { 
-
-    for (const orderline of this.orderlines.models) {
+    
+    for (const orderline of this.orderlines) {
       if (!validate_stock(orderline.product, orderline.quantity)) return false;
     }
     

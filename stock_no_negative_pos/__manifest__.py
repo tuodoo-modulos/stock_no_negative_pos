@@ -11,7 +11,7 @@
     "author": "Munin",  # RR
     "website": "https://www.munin.mx",
     "category": "Uncategorized",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "depends": ["base", "point_of_sale"],
     # always loaded
     "data": ["views/pos_config_views.xml"],

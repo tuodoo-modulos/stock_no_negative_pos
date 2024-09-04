@@ -93,14 +93,13 @@ patch(Orderline.prototype, {
     return result;
   },
 });
-// patch(Order.prototype, {
-//   pay()
-//   { 
+patch(Order.prototype, {
+  pay() {
+    console.log("entramos con ganas");
+    for (const orderline of this.orderlines) {
+      if (!validate_stock(orderline.product, orderline.quantity)) return false;
+    }
 
-//     for (const orderline of this.orderlines) {
-//       if (!validate_stock(orderline.product, orderline.quantity)) return false;
-//     }
-    
-//     return super.pay();
-//   },
-// });
+    return super.pay();
+  },
+});
